@@ -1,32 +1,68 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package card;
 
-/**
- * A class that fills a magic hand of 7 cards with random Card Objects
- * and then asks the user to pick a card and searches the array of cards
- * for the match to the user's card. To be used as starting code in ICE 1
- * @author srinivsi
+import java.util.Random;
+import java.util.Scanner;
+
+/*
+ * @modifier : Kirandeep Kaur;
+ * Student Number: 991715924
  */
 public class CardTrick {
-    
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         Card[] magicHand = new Card[7];
+        Random random = new Random();
+
         
-        for (int i=0; i<magicHand.length; i++)
-        {
-            Card c = new Card();
-            //c.setValue(insert call to random number generator here)
-            //c.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+        for (int i = 0; i < magicHand.length; i++) {
+            int number = random.nextInt(13) + 1; 
+            String suit = Card.SUITS[random.nextInt(Card.SUITS.length)]; 
+            magicHand[i] = new Card(number, suit);
         }
-        
-        //insert code to ask the user for Card value and suit, create their card
-        // and search magicHand here
-        //Then report the result here
-        // add one luckcard hard code 2,clubs
+
+      
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a card number (1-13):");
+        int value = scanner.nextInt();
+        System.out.println("Enter a suit (Hearts, Diamonds, Clubs, Spades):");
+        scanner.nextLine();  
+        String suit = scanner.nextLine();
+
+      
+        boolean found = false;
+        for (Card card : magicHand) {
+            if (card.getNumber() == value && card.getSuit().equalsIgnoreCase(suit)) {
+                found = true;
+                break;
+            }
+        }
+
+      
+        if (found) {
+            System.out.println("Your card was found in the magic hand!");
+        } else {
+            System.out.println("Your card was not found in the magic hand.");
+        }
     }
+
     
+    static class Card {
+        private final int number;
+        private final String suit;
+
+        public static final String[] SUITS = {"Hearts", "Diamonds", "Clubs", "Spades"};
+
+        public Card(int number, String suit) {
+            this.number = number;
+            this.suit = suit;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public String getSuit() {
+            return suit;
+        }
+    }
 }
