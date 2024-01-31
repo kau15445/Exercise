@@ -44,9 +44,9 @@ public class CardTrick {
 
        
         if (found) {
-            System.out.println("Your card was found in the magic hand!");
+            System.out.println("Your card was found in magic hand!");
         } else {
-            System.out.println("Your card was not found in the magic hand.");
+            System.out.println("Your card was not found in magic hand.");
         }
 
        
